@@ -1,0 +1,9 @@
+table {
+  //border-spacing: 0;
+}
+table, td {
+  border: 1px solid black;
+}
+th[class=month] {
+  background-color: #b0db73;
+}

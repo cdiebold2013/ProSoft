@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+  <link rel="stylesheet" href="css/calendarPage.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
   <script type="text/javascript" src="js/calendarTemplate.js"></script>
@@ -14,12 +15,11 @@
         <th>F</th>
         <th>S</th>
       </tr>
-      <tr>
-        <td>{{{day}}}</td>
-      </tr>
-      <tr>
-        <td>{{{month}}}</td>
-      </tr>
+      <tr><th class="month" align="center" colspan="7">{{{month}}} {{{year}}}</th></tr>
+      <tr><td>{{{day}}}</td></tr>
+      <tr><td>{{{day}}}</td></tr>
+      <tr><td>{{{day}}}</td></tr>
+      <tr><td>{{{day}}}</td></tr>
     </table>
   </script>
 </head>
