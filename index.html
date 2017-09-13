@@ -3,6 +3,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
   <script type="text/javascript" src="js/calendarTemplate.js"></script>
+  <script id="calendarTemplate" type="text/html">
+    <table>
+      <tr>
+        <th>S</th>
+        <th>M</th>
+        <th>T</th>
+        <th>W</th>
+        <th>T</th>
+        <th>F</th>
+        <th>S</th>
+      </tr>
+      <tr>
+        <td>{{{day}}}</td>
+      </tr>
+      <tr>
+        <td>{{{month}}}</td>
+      </tr>
 </head>
 <body>
   <h1>Calendar Display Page</h1>
