@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+</head>
+<body>
+  <h1>Calendar Display Page</h1>
+  <p>Please enter the following information to see the corresponding calendar view</p>
+  <form class="calendarInput" action="index.html" method="post">
+    <label for="startDate">Start Date:</label>
+    <input type="text" name="startDate" value=""> <br>
+    <label for="numDays">Number of days:</label>
+    <input type="text" name="numDays" value=""> <br>
+    <label for="countryCode">Country Code:</label>
+    <input type="text" name="countryCode" value=""> <br>
+    <button class="submit" type="button" name="button">Submit</button>
+  </form>
+  <div class="calendarView">
+
+  </div>
+</body>
