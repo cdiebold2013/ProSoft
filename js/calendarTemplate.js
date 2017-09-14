@@ -9,13 +9,24 @@ var calendarTemplate = {
     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     console.log(months[month-1] + day + year);
-
+    calendarTemplate.callHoliday(countryCode, year, month, day, months[month-1])
   },
-  loadTemplate: function () {
+  callHoliday: function(countryCode, year, month, startDay, expMonth) {
+    var request = $.ajax({
+      method: "GET",
+      url: "https://holidayapi.com/v1/holidays?key=b922f57e-2f17-4c1e-bdb0-4dacfe7094da&country=" + countryCode + "&year=" + year + "&month=" + month
+    });
+
+    request.done(function(data) {
+      console.log(data);
+      calendarTemplate.loadTemplate(startDay, expMonth, year)
+    });
+  },
+  loadTemplate: function (day, month, year) {
     var data = {
-      "day": "1",
-      "month":"September",
-      "year":"2017",
+      "day": day,
+      "month": month,
+      "year": year,
       "days": ["1","2","3","4","5","6","7"]
     },
     template = $("#calendarTemplate").html(),
