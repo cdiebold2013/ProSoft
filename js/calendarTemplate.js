@@ -1,7 +1,4 @@
 var calendarTemplate = {
-  // init: funciton () {
-  //     //put js here that should run on page load
-  // },
   loadTemplate: function () {
     var data = {
       "day": "1",
@@ -13,11 +10,9 @@ var calendarTemplate = {
     output = Mustache.render(template, data);
 
     $(".calendarView").append(output);
-  }
+  },
 };
 
 $(document).ready(function (){
- //calendarTemplate.init();
-
  $(".submit").on("click", calendarTemplate.loadTemplate);
 });
