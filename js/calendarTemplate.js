@@ -21,6 +21,9 @@ var calendarTemplate = {
       console.log(data);
       calendarTemplate.loadTemplate(startDay, expMonth, year)
     });
+    request.fail(function (){
+      $(".calendarView").append("<p>There are issues, please try again</p>");
+    });
   },
   loadTemplate: function (day, month, year) {
     var data = {
