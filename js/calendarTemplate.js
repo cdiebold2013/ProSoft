@@ -1,4 +1,16 @@
 var calendarTemplate = {
+  handleSubmit: function () {
+    var startDate = $("input[name=startDate]").val().split("/"),
+    numDays = $("input[name=numDays]").val(),
+    countryCode = $("input[name=countryCode]").val(),
+    month = startDate[0],
+    day = startDate[1],
+    year = startDate[2],
+    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    console.log(months[month-1] + day + year);
+
+  },
   loadTemplate: function () {
     var data = {
       "day": "1",
@@ -14,5 +26,5 @@ var calendarTemplate = {
 };
 
 $(document).ready(function (){
- $(".submit").on("click", calendarTemplate.loadTemplate);
+ $(".submit").on("click", calendarTemplate.handleSubmit);
 });
