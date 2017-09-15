@@ -2,19 +2,19 @@ var calendarTemplate = {
 
   handleSubmit: function () {
     var startDate = new Date($("input[name=startDate]").val()),
-    numDays = $("input[name=numDays]").val(),
-    countryCode = $("input[name=countryCode]").val(),
-    month = startDate.getMonth(),
-    day = startDate.getDate(),
-    year = startDate.getFullYear(),
-    nextMonth = month + 1,
-    prevMonth = month - 1,
-    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    dayInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-    days = ["S", "M", "T", "W", "T", "F", "S"];
+    daysToShow = parseInt($("input[name=numDays]").val())-1,
+    countryCode = $("input[name=countryCode]").val();
 
-    console.log(startDate);
-    calendarTemplate.loadCalendar(startDate);
+    if($(".calendar").length > 0) {
+      $(".calendar").remove();
+    };
+
+    if(startDate === "Invalid Date" || daysToShow === NaN || countryCode === "") {
+      $(".calendarView").append("<p class ='calendar error'>There are issues, please try again</p>")
+    } else {
+      calendarTemplate.loadCalendar(startDate, daysToShow);
+    };
+
   },
   callHoliday: function(countryCode, year, month, startDay, expMonth) {
     var request = $.ajax({
@@ -27,10 +27,10 @@ var calendarTemplate = {
       calendarTemplate.loadTemplate(startDay, expMonth, year)
     });
     request.fail(function (){
-      $(".calendarView").append("<p>There are issues, please try again</p>");
+      $(".calendarView").append("<p class ='calendar error'>There are issues, please try again</p>");
     });
   },
-  loadCalendar: function(startDate) {
+  loadCalendar: function(startDate, daysToShow) {
     var html = "",
     febDays = "",
     startDate = new Date(startDate),
@@ -51,8 +51,8 @@ var calendarTemplate = {
       febDays = calendarTemplate.getFebDays(year);
     }
     html = calendarTemplate.buildCalendarHeader(months[month], year);
-    html += calendarTemplate.buildCalendarInside(weekdays, weekdays2, monthDays, day);
-
+    html += calendarTemplate.buildCalendarInside(weekdays, weekdays2, monthDays, day, daysToShow);
+    html += "</tbody></table>"
     $(".calendarView").append(html);
 
   },
@@ -66,15 +66,15 @@ var calendarTemplate = {
   buildCalendarHeader: function(monthName, year) {
     var htmlHeader = "";
 
-    htmlHeader = "<table class='calendar'><tr class ='dayHeader'><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr class='month'><th colspan='7'>" + monthName + " " + year + "</th></tr>";
+    htmlHeader = "<table class='calendar'><tbody><tr class ='dayHeader'><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr class='month'><th colspan='7'>" + monthName + " " + year + "</th></tr><tr>";
     return htmlHeader;
   },
-  buildCalendarInside: function(weekdays, weekdays2, monthDays, day) {
+  buildCalendarInside: function(weekdays, weekdays2, monthDays, day, daysToShow) {
     var counter = 1
     htmlInside = "";
 
     while (weekdays > 0) {
-      htmlInside += "<td class 'monthPre'></td>";
+      htmlInside += "<td class='monthPre'> </td>";
       weekdays --;
 
     }
@@ -83,8 +83,13 @@ var calendarTemplate = {
         weekdays2 = 0;
         htmlInside +="</tr><tr>";
       }
-      if (counter === day) {
+      if (counter < day) {
+        htmlInside += "<td class='blankDay'> </td>";
+      } else if (counter === day) {
         htmlInside += "<td class='startDate'>" + counter + "</td>";
+      } else if (counter > (day + daysToShow)) {
+        console.log("HI");
+        htmlInside += "<td class='blankDay'></td>";
       } else {
         htmlInside += "<td class=''>" + counter + "</td>";
       }
@@ -92,8 +97,9 @@ var calendarTemplate = {
       weekdays2++;
       counter++;
     }
-    while (counter >= monthDays && weekdays2 <= 6) {
-      htmlInside += "<td class 'monthPost'></td>";
+
+    while (counter >= monthDays && weekdays2 <= 6 ) {
+      htmlInside += "<td class='blankDay'></td>";
       counter++;
       weekdays2++;
     }
