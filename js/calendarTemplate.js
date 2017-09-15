@@ -12,25 +12,11 @@ var calendarTemplate = {
     if(startDate === "Invalid Date" || daysToShow === NaN || countryCode === "") {
       $(".calendarView").append("<p class ='calendar error'>There are issues, please try again</p>")
     } else {
-      calendarTemplate.loadCalendar(startDate, daysToShow);
+      calendarTemplate.loadCalendar(startDate, daysToShow, countryCode);
     };
 
   },
-  callHoliday: function(countryCode, year, month, startDay, expMonth) {
-    var request = $.ajax({
-      method: "GET",
-      url: "https://holidayapi.com/v1/holidays?key=b922f57e-2f17-4c1e-bdb0-4dacfe7094da&country=" + countryCode + "&year=" + year + "&month=" + month
-    });
-
-    request.done(function(data) {
-      console.log(data);
-      calendarTemplate.loadTemplate(startDay, expMonth, year)
-    });
-    request.fail(function (){
-      $(".calendarView").append("<p class ='calendar error'>There are issues, please try again</p>");
-    });
-  },
-  loadCalendar: function(startDate, daysToShow) {
+  loadCalendar: function(startDate, daysToShow, countryCode) {
     var html = "",
     febDays = "",
     startDate = new Date(startDate),
@@ -54,6 +40,7 @@ var calendarTemplate = {
     html += calendarTemplate.buildCalendarInside(weekdays, weekdays2, monthDays, day, daysToShow);
     html += "</tbody></table>"
     $(".calendarView").append(html);
+    calendarTemplate.callHoliday(countryCode, year, month);
 
   },
   getFebDays: function(year) {
@@ -104,6 +91,19 @@ var calendarTemplate = {
       weekdays2++;
     }
     return htmlInside;
+  },
+  callHoliday: function(countryCode, year, month) {
+    var request = $.ajax({
+      method: "GET",
+      url: "https://holidayapi.com/v1/holidays?key=b922f57e-2f17-4c1e-bdb0-4dacfe7094da&country=" + countryCode + "&year=" + year + "&month=" + (month + 1)
+    });
+
+    request.done(function(data) {
+      console.log(data);
+    });
+    request.fail(function (){
+      $(".calendarView").append("<p class ='calendar error'>There are issues, please try again</p>");
+    });
   }
 
 };
