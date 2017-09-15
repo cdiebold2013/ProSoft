@@ -73,12 +73,11 @@ var calendarTemplate = {
       if (counter < day) {
         htmlInside += "<td class='blankDay'> </td>";
       } else if (counter === day) {
-        htmlInside += "<td class='startDate'>" + counter + "</td>";
+        htmlInside += "<td class='startDate' data-value=" + counter + " >" + counter + "</td>";
       } else if (counter > (day + daysToShow)) {
-        console.log("HI");
-        htmlInside += "<td class='blankDay'></td>";
+        htmlInside += "<td class='blankDay' data-value=" + counter + "></td>";
       } else {
-        htmlInside += "<td class=''>" + counter + "</td>";
+        htmlInside += "<td class='' data-value=" + counter + ">" + counter + "</td>";
       }
 
       weekdays2++;
@@ -99,11 +98,20 @@ var calendarTemplate = {
     });
 
     request.done(function(data) {
-      console.log(data);
+
+      calendarTemplate.addHolidayToDate(data);
     });
     request.fail(function (){
       $(".calendarView").append("<p class ='calendar error'>There are issues, please try again</p>");
     });
+  },
+  addHolidayToDate: function(data){
+
+    for (var i = 0; i < data.holidays.length; i++) {
+      var holidayDate = data.holidays[i].date,
+      holidayDateForm = new Date(holidayDate);
+      $("td[data-value=" + holidayDateForm.getDate() + "]").addClass("holiday");
+    }
   }
 
 };
