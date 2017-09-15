@@ -1,0 +1,14 @@
+Remaining Tidbits
+
+Requirements I neglected to complete/bugs identified:
+1. This was supposed to show multiple months if it spilled over to the next month which it isn't doing
+2. In the images, it has a calendar with only 3 weeks, but mine always shows the whole month
+3. If the whole week has blank days, I neglected to include a min height so the table cells don't collapse
+4. It seems that some of the API responses are a bit off, I've noticed with January in its response it isn't quite showing the right responses
+
+If I had more time:
+1. I would have used customized fonts/matched the fonts in the screenshots
+2. I would have styled the page more, it's very bare but I didn't have ideas on how to style it so I left it as is
+3. I would have liked to list the holidays beneath the calendar for more information with their names
+4. I would have added the hover label
+5. I also don't like how few error states I've included, I would have more validations, and more descriptive error states

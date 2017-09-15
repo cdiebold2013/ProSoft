@@ -61,7 +61,7 @@ var calendarTemplate = {
     htmlInside = "";
 
     while (weekdays > 0) {
-      htmlInside += "<td class='monthPre'> </td>";
+      htmlInside += "<td class='blankDay'> </td>";
       weekdays --;
 
     }

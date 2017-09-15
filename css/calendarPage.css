@@ -1,9 +1,30 @@
+.calendarView {
+  margin: 20px;
+}
 table {
-  //border-spacing: 0;
+  min-width: 220px;
+  text-align: center;
 }
-table, td {
-  border: 1px solid black;
-}
-th[class=month] {
+tr[class="month"] {
   background-color: #b0db73;
+}
+
+td:nth-child(1),
+td:nth-child(7) {
+  background-color: yellow;
+}
+td:nth-child(2),
+td:nth-child(3),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6) {
+  background-color: #9be09b;
+}
+
+td[class="holiday"] {
+  background-color: orange;
+}
+
+td[class="blankDay"] {
+  background-color: lightgrey;
 }
