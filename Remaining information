@@ -12,3 +12,4 @@ If I had more time:
 3. I would have liked to list the holidays beneath the calendar for more information with their names
 4. I would have added the hover label
 5. I also don't like how few error states I've included, I would have more validations, and more descriptive error states
+6. I also don't love how I've organized my code, I'm used to working within a larger codebase and adhering to a variety of coding standards so I was just sort of throwing this together. But I'd want to have a better infrastructure
